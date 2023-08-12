@@ -1,19 +1,9 @@
 let compScore = 0;
 let playerScore = 0;
-
+const weapons = ['scissors', 'paper', 'rock']
 // generate random choice for computer
 function getComputerChoice() {
-    let computerChoice = Math.floor(Math.random() * 3 + 1)
-    switch(computerChoice) {
-        case 1:
-            computerChoice = 'scissors';
-            break;
-        case 2:
-            computerChoice = 'paper';
-            break;
-        case 3:
-            computerChoice = 'rock';
-    }
+    let computerChoice = weapons[Math.floor(Math.random() * 3)];
     return computerChoice;
 }
 
@@ -99,5 +89,7 @@ function game() {
 
     return `Thats game! Your score is ${playerScore}! The computer's is ${compScore}! `;
 } 
+
+
 
 console.log(game() + printGameWinner(playerScore, compScore))
