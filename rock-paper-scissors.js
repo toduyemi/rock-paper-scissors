@@ -1,14 +1,28 @@
+//gameplay variables
 let compScore = 0;
 let playerScore = 0;
-const weapons = ['scissors', 'paper', 'rock']
+let roundCount = 0;
+const weapons = ['scissors', 'paper', 'rock'];
+
+const scissors = document.querySelector('#scissors');
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+
+//html manipulation variables
+const playerScoreCard = document.querySelector('#playerScore');
+const compScoreCard = document.querySelector('#compScore');
+
+
 // generate random choice for computer
 function getComputerChoice() {
     let computerChoice = weapons[Math.floor(Math.random() * 3)];
     return computerChoice;
 }
 
+
 //generate game mechanics
 function play(player, computer) {
+    roundCount += 1;
     if (player == 'scissors') {
         if (computer == 'scissors') {
             return 'Tie! Your scissors are unable to vanquish each other!';
@@ -37,7 +51,7 @@ function play(player, computer) {
 
         else {
             compScore++;
-            return 'Loss! Your paper has carved up by their scissors!'
+            return 'Loss! Your paper was carved up by their scissors!'
         }
     }
 
@@ -77,19 +91,43 @@ function printGameWinner(playerScore, compScore) {
     }
 }
 
-//main game of 5 rounds
-function game() {
-    
-    for (let i = 0; i < 5; i++) {
-        let playerSelection = prompt('Make your selection! ').toLowerCase();
-        const computerSelection = getComputerChoice();
-        console.log('Computer chose ' + computerSelection);
-        console.log(play(playerSelection, computerSelection));
+
+function printGameWinner(playerScore, compScore) {
+    if (playerScore == compScore) {
+        return 'Damn ya\'ll tied! Run it again!!';
     }
 
-    return `Thats game! Your score is ${playerScore}! The computer's is ${compScore}! `;
+    else if (playerScore > compScore) {
+        return 'You came! You conquered! Noice!'
+    }
+
+    else {
+        return 'Damn you really gon let a computer do you like this? :$';
+    }
+}
+
+//main game of 5 rounds
+function game() {
+    if (roundCount >= 5) {
+        
+        roundCount = 0;
+        console.log(`Thats game! Your score is ${playerScore}! The computer's is ${compScore}! `);
+        return console.log(printGameWinner(playerScore, compScore));
+    }
+    
+    const computerSelection = getComputerChoice();
+    let string = play(this.id, computerSelection);
+    playerScoreCard.textContent = playerScore;
+    compScoreCard.textContent = compScore;
+    console.log('Computer chose ' + computerSelection);
+    console.log(string);
+
 } 
 
 
+scissors.addEventListener('click', game);
+rock.addEventListener('click', game);
+paper.addEventListener('click', game); 
 
-console.log(game() + printGameWinner(playerScore, compScore))
+
+
