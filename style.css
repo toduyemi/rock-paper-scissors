@@ -1,15 +1,22 @@
 body {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 248px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
 }
 
 .results-container {
     display: flex;
     justify-content: center;
     gap: 30px;
+    font-size: 160px;
 }
 .commentary-container {
-    height: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    
 }
 .button-container {
     height: 100px;
