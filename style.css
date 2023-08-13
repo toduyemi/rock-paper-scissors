@@ -1,0 +1,25 @@
+body {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 248px;
+}
+
+.results-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+.commentary-container {
+    height: 200px;
+}
+.button-container {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    align-items: flex-end;
+}
+
+button {
+    height: 60px;
+    width: 80px;
+}
