@@ -12,6 +12,11 @@ const paper = document.querySelector('#paper');
 const playerScoreCard = document.querySelector('#playerScore');
 const compScoreCard = document.querySelector('#compScore');
 
+const commentaryContainer = document.querySelector('.commentary-container');
+
+const gameResult = document.createElement('div');
+gameResult.style.cssText = 'font-size: 48px;';
+
 
 // generate random choice for computer
 function getComputerChoice() {
@@ -19,7 +24,18 @@ function getComputerChoice() {
     return computerChoice;
 }
 
+// reset game 
+function resetGame() {
+    roundCount = 0;
+    playerScore = 0;
+    compScore = 0;
+    playerScoreCard.textContent = playerScore;
+    compScoreCard.textContent = compScore;
 
+    while (commentaryContainer.hasChildNodes) {
+        commentaryContainer.removeChild(commentaryContainer.lastChild);
+    }
+}
 //generate game mechanics
 function play(player, computer) {
     roundCount += 1;
@@ -106,21 +122,30 @@ function printGameWinner(playerScore, compScore) {
     }
 }
 
+
 //main game of 5 rounds
 function game() {
     if (roundCount >= 5) {
-        
-        roundCount = 0;
-        console.log(`Thats game! Your score is ${playerScore}! The computer's is ${compScore}! `);
-        return console.log(printGameWinner(playerScore, compScore));
+        resetGame();
     }
     
     const computerSelection = getComputerChoice();
-    let string = play(this.id, computerSelection);
+
+    // printing game commentary placed here so it would create a running list instead of replacing old commentary.
+    const commentary = document.createElement('div');
+    commentary.classList.add('commentary');
+    commentary.textContent = `Round ${roundCount +1}: Computer chose ${computerSelection}!\n ${play(this.id, computerSelection)}`;
+    commentaryContainer.appendChild(commentary);
     playerScoreCard.textContent = playerScore;
     compScoreCard.textContent = compScore;
-    console.log('Computer chose ' + computerSelection);
-    console.log(string);
+
+    if (roundCount >= 5) {
+
+        gameResult.textContent = `Thats game! Your score is ${playerScore}! The computer's is ${compScore}! ${printGameWinner(playerScore, compScore)}`;
+        commentaryContainer.appendChild(gameResult);
+    }
+    // console.log('Computer chose ' + computerSelection);
+    // console.log(string);
 
 } 
 
